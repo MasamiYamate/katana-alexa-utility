@@ -1,4 +1,4 @@
-module.exports.getSlotValue = function (handlerInput , slotName , isDebugMode) {
+exports.getSlotValue = function (handlerInput , slotName , isDebugMode) {
     return getSlotValue(handlerInput , slotName , isDebugMode)
 }
 
