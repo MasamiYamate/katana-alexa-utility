@@ -1,24 +1,24 @@
-module.exports.isDisplay = function (handlerInput) {
+exports.isDisplay = function (handlerInput) {
     return isDisplayDevice(handlerInput)
 }
 
-module.exports.getScreenType = function (handlerInput) {
+exports.getScreenType = function (handlerInput) {
 	return getScreenType(handlerInput)
 }
 
-module.exports.getScreenSize = function (handlerInput) {
+exports.getScreenSize = function (handlerInput) {
 	return getScreenSize(handlerInput)
 }
 
-module.exports.getApplicationId = function (handlerInput) {
+exports.getApplicationId = function (handlerInput) {
 	return getApplicationId(handlerInput)
 }
 
-module.exports.getUserId = function (handlerInput) {
+exports.getUserId = function (handlerInput) {
 	return getUserId(handlerInput)
 }
 
-module.exports.getDeviceId = function (handlerInput) {
+exports.getDeviceId = function (handlerInput) {
 	return getDeviceId(handlerInput)
 }
 

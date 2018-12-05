@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/MasamiYamate/alexautility/issues"
   },
-  "homepage": "https://github.com/MasamiYamate/alexautility#readme"
+  "homepage": "https://github.com/MasamiYamate/alexautility#readme",
+  "dependencies": {
+    "ask-sdk-core": "^2.3.0",
+    "ask-sdk-model": "^1.9.0"
+  }
 }
