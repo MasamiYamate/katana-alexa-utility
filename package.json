@@ -1,0 +1,22 @@
+{
+  "name": "alexautility",
+  "version": "1.0.0",
+  "description": "Generic functions used in Alexa skill development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasamiYamate/alexautility.git"
+  },
+  "keywords": [
+    "alexa"
+  ],
+  "author": "MasamiYamate",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MasamiYamate/alexautility/issues"
+  },
+  "homepage": "https://github.com/MasamiYamate/alexautility#readme"
+}
