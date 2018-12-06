@@ -21,6 +21,7 @@
   "homepage": "https://github.com/MasamiYamate/alexautility#readme",
   "dependencies": {
     "ask-sdk-core": "^2.3.0",
-    "ask-sdk-model": "^1.9.0"
+    "ask-sdk-model": "^1.9.0",
+    "request": "^2.88.0"
   }
 }
