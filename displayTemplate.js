@@ -18,7 +18,7 @@ module.exports.bodyType = {
         this.backgroundImageSrc = src
     },
     //テンプレート内で表示する画像パスのセット
-    setImgSec: function (src) {
+    setImgSrc: function (src) {
         this.imageSrc = src
     },
 
@@ -75,6 +75,75 @@ module.exports.bodyType = {
     }
 }
 
+module.exports.listType = {
+    //Tokenをセットします
+    setToken: function (token) {
+        this.token = token
+    },
+    //戻るボタン
+    setBackBtnIsVisible: function (isVisible) {
+        this.backButton = isVisible
+    },
+    //Titleの設定
+    setTitle: function (title) {
+        this.titleTxt = title
+    },
+    //背景画像パス、のセット
+    setBackgroundImgSrc: function (src) {
+        this.backgroundImageSrc = src
+    },
+    //ListItemを追加します
+    addListItem: function (tokenId , imgSrc , primaryText , secondaryText , tertiaryText) {
+        var listItem = []
+        if (this.listItem) {
+            listItem = this.listItem
+        }
+        var addItem = {'token':''}
+        if (tokenId) {
+            addItem['token'] = tokenId
+        }
+        if (imgSrc) {
+            addItem['src'] = imgSrc
+        }
+        var setTextData = {'primaryText': '' , 'secondaryText': '', 'tertiaryText':''}
+        if (this.primaryText) {
+            setTextData['primaryText'] = this.primaryText
+        }
+        if (this.secondaryText) {
+            setTextData['secondaryText'] = this.secondaryText
+        }
+        if (this.tertiaryText) {
+            setTextData['tertiaryText'] = this.tertiaryText
+        }
+        addItem['textContent'] = setTextData
+        listItem.push(addItem)
+        this.listItem = listItem
+    },
+    //テンプレートを生成します
+    create : function (handlerInput , typeName) {
+        var setData = {}
+        if (this.token) {
+            setData['token'] = this.token
+        }
+        if (this.isVisible) {
+            setData['backButton'] = this.isVisible
+        }
+        if (this.titleTxt) {
+            setData['title'] = this.titleTxt
+        }
+        if (this.backgroundImageSrc) {
+            setData['backgroundImage'] = this.backgroundImageSrc
+        }
+        if (this.listItem) {
+            setData['listItems'] = this.listItem
+        }
+        let addTemplate = createListTemplate(handlerInput , setData)
+        if (addTemplate) {
+            handlerInput.responseBuilder.addRenderTemplateDirective(addTemplate)
+        }
+    }
+}
+
 function createBodyTemplate (typeName , setData) {
     var responseData = {type:typeName}
     //Tokenの付与
@@ -100,16 +169,16 @@ function createBodyTemplate (typeName , setData) {
         responseData['backgroundImage'] = createImageContent(setData['backgroundImage']) 
     }
     //テンプレート内表示用画像の付与
-    if (setData['image'] && (typeName == 'BodyTemplate2' || typeName == 'BodyTemplate3')) {
+    if (setData['image']) {
         responseData['image'] = createImageContent(setData['image'])
     }
     //テキストデータの付与
-    var textContentDic = {}
+    var textContentDic = null
     if (setData['textContent']) {
         textContentDic = setData['TextContent']
-        responseData['textContent'] = setTextContentData
     }
     responseData['textContent'] = createTextContent(textContentDic)
+
     return responseData
 }
 
@@ -163,23 +232,23 @@ function createListItems (items) {
 }
 
 function createImageContent(src) {
-    return new Alexa.ImageHelper()
-        .addImageInstance(src)
-        .getImage
+    return new Alexa.ImageHelper().addImageInstance(src).getImage()
 }
 
 function createTextContent(textData) {
   var primaryTxt    = '';
   var secondaryTxt  = '';
   var tertiaryTxt   = '';
-  if (textData['primaryText']) {
-    primaryTxt = textData['primaryText']
-  }
-  if (textData['secondaryText']) {
-    secondaryTxt = textData['secondaryText']
-  }
-  if (textData['tertiaryText']) {
-    tertiaryTxt = textData['tertiaryText']
+  if (textData) {
+    if (textData.primaryText) {
+        primaryTxt = textData['primaryText']
+    }
+    if (textData.secondaryText) {
+        secondaryTxt = textData['secondaryText']
+    }
+    if (textData.tertiaryText) {
+        tertiaryTxt = textData['tertiaryText']
+    }
   }
   return new Alexa.RichTextContentHelper()
     .withPrimaryText(primaryTxt)
