@@ -116,15 +116,9 @@ function getUserId (handlerInput) {
 function getDeviceId (handlerInput) {
 	let context = handlerInput.requestEnvelope.context
 	if (context) {
-		let system = context.System
-		if (system) {
-			let device = system.device
-			if (device) {
-				let deviceId = device.userId
-				if (deviceId) {
-					return deviceId
-				}
-			}
+		let device = context.System.device
+		if (device) {
+			return device.deviceId
 		}
 	}
 	return null
