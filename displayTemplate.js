@@ -1,4 +1,5 @@
-const Alexa = require('ask-sdk-core')
+const Alexa     = require('ask-sdk-core')
+const device    = require('./device.js')
 
 module.exports.bodyType = {
     //Tokenをセットします
@@ -66,7 +67,7 @@ module.exports.bodyType = {
 
         let addTemplate = createBodyTemplate(typeName , setData)
         //付与対象のテンプレートがある場合は、付与します
-        if (addTemplate) {
+        if (addTemplate && device.isDisplay()) {
             handlerInput.responseBuilder.addRenderTemplateDirective(addTemplate)
             if (typeName == 'BodyTemplate3' && this.hint) {
                 handlerInput.responseBuilder.addHintDirective(this.hint)
@@ -138,7 +139,7 @@ module.exports.listType = {
             setData['listItems'] = this.listItem
         }
         let addTemplate = createListTemplate(handlerInput , setData)
-        if (addTemplate) {
+        if (addTemplate && device.isDisplay()) {
             handlerInput.responseBuilder.addRenderTemplateDirective(addTemplate)
         }
     }
