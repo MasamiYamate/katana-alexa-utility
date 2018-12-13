@@ -14,15 +14,15 @@ function getSlotValue (handlerInput , slotName , isDebugMode) {
                     let resolutionsPerAuthority = resolutions['resolutionsPerAuthority'][i]
                     let status = resolutionsPerAuthority['status']
                     let code = status['code']
-
                     if (code == "ER_SUCCESS_MATCH") {
                         var responseValue = null
                         let values = resolutionsPerAuthority['values']
                         for (var j in values) {
-                            let value = values[j]
+                            let value = values[j]['value']
                             let name = value['name']
                             if (name) {
                                 responseValue = name
+                                break
                             }
                         }
                         return responseValue
