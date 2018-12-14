@@ -1,7 +1,7 @@
 const request = require('request')
 
 /*http同期処理を行う*/
-exports = async function (url) {
+exports.request = async function (url) {
     let response = function () {
         return new Promise(function (resolve , reject){
             request.get({
