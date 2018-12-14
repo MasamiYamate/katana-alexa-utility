@@ -9,5 +9,5 @@ module.exports = {
     template: template,
     dynamodb: dynamodb,
     slot: slot,
-    syncAPIRequest: syncAPIRequest
+    syncAPI: syncAPIRequest
 }
