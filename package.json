@@ -1,5 +1,5 @@
 {
-  "name": "samurai-alexa-utility",
+  "name": "katana-alexa-utility",
   "version": "1.0.0",
   "description": "Generic functions used in Alexa skill development",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MasamiYamate/samurai-alexa-utility.git"
+    "url": "git+https://github.com/MasamiYamate/katana-alexa-utility.git"
   },
   "keywords": [
     "alexa"
@@ -16,9 +16,9 @@
   "author": "MasamiYamate",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MasamiYamate/samurai-alexa-utility/issues"
+    "url": "https://github.com/MasamiYamate/katana-alexa-utility/issues"
   },
-  "homepage": "https://github.com/MasamiYamate/samurai-alexa-utility#readme",
+  "homepage": "https://github.com/MasamiYamate/katana-alexa-utility#readme",
   "dependencies": {
     "ask-sdk-core": "^2.3.0",
     "ask-sdk-model": "^1.9.0",
