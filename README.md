@@ -20,10 +20,10 @@ const Katana = require('katana-alexa-utility')
 //Launch intent handler
 const LaunchIntentHandler = {
     canHandle(handlerInput) {
-		const request = handlerInput.requestEnvelope.request
-		return request.type === 'LaunchRequest'
-	},
-	async handle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request
+        return request.type === 'LaunchRequest'
+    },
+    async handle(handlerInput) {
         //Device data request
         //Get application id
         //Return type is String
@@ -71,61 +71,61 @@ const LaunchIntentHandler = {
         //※Designation to 「await」
         await util.dynamodb.saveData(handlerInput , saveData)
 
-		return handlerInput.responseBuilder
-			.speak('Wellcome to katana alexa utility test skill')
-			.withShouldEndSession(true)
-        	.getResponse();
-	}
+    return handlerInput.responseBuilder
+        .speak('Wellcome to katana alexa utility test skill')
+        .withShouldEndSession(true)
+        .getResponse();
+    }
 }
 
 //Help intent handler
 const HelpIntentHandler = {
-	canHandle(handlerInput) {
-		const request = handlerInput.requestEnvelope.request;
-		return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent');
-	},
-	handle(handlerInput) {
-		return handlerInput.responseBuilder
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent');
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
             .withShouldEndSession(true)
-			.getResponse();
-	}
+            .getResponse();
+    }
 }
 
 //Skill end handler
 const SkillEndHandler = {
-	canHandle(handlerInput) {
-		const request = handlerInput.requestEnvelope.request;
-		return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.CancelIntent')
-			|| (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.StopIntent')
-			|| (request.type === 'SessionEndedRequest' && request.type === 'USER_INITIATED');
-	},
-	handle(handlerInput) {
-		return handlerInput.responseBuilder
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.CancelIntent')
+            || (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.StopIntent')
+            || (request.type === 'SessionEndedRequest' && request.type === 'USER_INITIATED');
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
             .withShouldEndSession(true)
-			.getResponse();
-	}
+            .getResponse();
+    }
 }
 
 //Error handler
 const ErrorHandler = {
-	canHandle(handlerInput) {
-		return true;
-	},
-	handle(handlerInput) {
-		return handlerInput.responseBuilder
-			.speak("Error request Please retry")
-			.withShouldEndSession(true)
-			.getResponse();
-	}
+    canHandle(handlerInput) {
+        return true;
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .speak("Error request Please retry")
+            .withShouldEndSession(true)
+            .getResponse();
+    }
 }
 
 exports.handler = Alexa.SkillBuilders.standard()
-	.addRequestHandlers(
-		LaunchIntentHandler,
+    .addRequestHandlers(
+        LaunchIntentHandler,
         HelpIntentHandler,
-		SkillEndHandler,
-		)
-	.addErrorHandlers(ErrorHandler)
-	.lambda();
+        SkillEndHandler,
+        )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
 
 ```
