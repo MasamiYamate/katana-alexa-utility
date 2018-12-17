@@ -23,6 +23,7 @@ function getSlotValue (handlerInput , slotName , isDebugMode) {
                             let name = value['value']['name']
                             if (name) {
                                 responseValue = name
+                                break
                             }
                         }
                         return responseValue
