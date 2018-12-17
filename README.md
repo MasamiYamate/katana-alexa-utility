@@ -12,7 +12,7 @@ npm install --save katana-alexa-utility
 ```
 
 ## How to use
-
+### example
 ```sample.js
 const Alexa = require('ask-sdk')
 const Katana = require('katana-alexa-utility')
@@ -130,6 +130,7 @@ exports.handler = Alexa.SkillBuilders.standard()
 
 ```
 
+### Create template example
 ```template.js
 const Alexa = require('ask-sdk')
 const Katana = require('katana-alexa-utility')
