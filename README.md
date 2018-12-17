@@ -129,3 +129,106 @@ exports.handler = Alexa.SkillBuilders.standard()
     .lambda();
 
 ```
+
+```template.js
+const Alexa = require('ask-sdk')
+const Katana = require('katana-alexa-utility')
+
+//Launch intent handler
+const LaunchIntentHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request
+        return request.type === 'LaunchRequest'
+    },
+    async handle(handlerInput) {
+        //Create body template
+        //Set token string
+        Katana.template.bodyType.setToken('TOKEN');
+        //Set back btn visible flag
+        Katana.template.bodyType.setBackBtnIsVisible(true)
+        //Set title string
+        Katana.template.bodyType.setTitle(displayTitle);
+        //Set background image url
+        Katana.template.bodyType.setBackgroundImgSrc('Image url');
+        //Set body image url
+        Katana.template.bodyType.setImgSrc('Image url');
+        //Set body text string
+        Katana.template.bodyType.setText(primaryText , secondaryText , tertiaryText);
+        //Set hint text string
+        //※Enable of Body template 3 only
+        Katana.template.bodyType.setHintMsg('Hint text');
+        //Create body template
+        Katana.template.bodyType.create(handlerInput , 'Body template id')
+
+        //Create list template
+        //Set token string
+        Katana.template.listType.setToken('TOKEN');
+        //Set back btn visible flag
+        Katana.template.listType.setBackBtnIsVisible(true)
+        //Set title string
+        Katana.template.listType.setTitle(displayTitle);
+        //Set background image url
+        Katana.template.listType.setBackgroundImgSrc('Image url');
+        //Push list item
+        //※Run as many items as you want
+        Katana.template.listType.addListItem(tokenId , imgSrc , primaryText , secondaryText , tertiaryText);
+        ////Create list template
+        Katana.template.listType.create(handlerInput , 'List template id');
+
+        return handlerInput.responseBuilder
+            .speak('Wellcome to katana alexa utility test skill')
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+}
+
+//Help intent handler
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.HelpIntent');
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+}
+
+//Skill end handler
+const SkillEndHandler = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        return (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.CancelIntent')
+            || (request.type === 'IntentRequest' && request.intent.name === 'AMAZON.StopIntent')
+            || (request.type === 'SessionEndedRequest' && request.type === 'USER_INITIATED');
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+}
+
+//Error handler
+const ErrorHandler = {
+    canHandle(handlerInput) {
+        return true;
+    },
+    handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .speak("Error request Please retry")
+            .withShouldEndSession(true)
+            .getResponse();
+    }
+}
+
+exports.handler = Alexa.SkillBuilders.standard()
+    .addRequestHandlers(
+        LaunchIntentHandler,
+        HelpIntentHandler,
+        SkillEndHandler,
+        )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
+```
