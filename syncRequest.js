@@ -8,14 +8,18 @@ exports.request = async function (url) {
                 url:url
             } , function (error , response , body) {
                 if(!error) {
-                    resolve(body);
+                    resolve(body)
                 } else {
-                    reject(error);
+                    reject(error)
                 }
             })
-        });
+        })
     }
-    let res = await response();
-    var jsonData = JSON.parse(res);
-    return jsonData;
+    try {
+        let res = await response()
+        var jsonData = JSON.parse(res)
+        return jsonData
+    }catch (e) {
+        return null
+    }
 }

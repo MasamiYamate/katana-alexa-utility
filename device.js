@@ -2,8 +2,12 @@ exports.isDisplay = function (handlerInput) {
     return isDisplayDevice(handlerInput)
 }
 
-exports.getScreenType = function (handlerInput) {
-	return getScreenType(handlerInput)
+exports.isGeolocation = function (handlerInput) {
+	return isGeolocation(handlerInput)
+}
+
+exports.getShapeType = function (handlerInput) {
+	return getShapeType(handlerInput)
 }
 
 exports.getScreenSize = function (handlerInput) {
@@ -22,45 +26,48 @@ exports.getDeviceId = function (handlerInput) {
 	return getDeviceId(handlerInput)
 }
 
+exports.getGeolocation = function (handlerInput) {
+	return getGeolocation(handlerInput)
+}
+
 //ディスプレイ付きデバイスか判定します
 function isDisplayDevice (handlerInput) {
-    let context = handlerInput.requestEnvelope.context
-	if (context) {
-		let system = context.System
-		if (system) {
-			let device = system.device
-			if (device) {
-				let supportedInterfaces = device.supportedInterfaces
-				if (supportedInterfaces) {
-					let display = supportedInterfaces.Display
-					if (display) {
-						return true
-					}
-				}
+    let device = handlerInput.requestEnvelope.context.System.device
+	if (device) {
+		let supportedInterfaces = device.supportedInterfaces
+		if (supportedInterfaces) {
+			let display = supportedInterfaces.Display
+			if (display) {
+				return true
 			}
 		}
 	}
 	return false
 }
 
-function getScreenType (handlerInput) {
-	let viewSize = getScreenSize(handlerInput)
-	let w = viewSize.w
-	let h = viewSize.h
-	if (w && h) {
-		if (w <= 480 && h <= 480) {
-			return "small"
-		}else if (w <= 1024 && h <= 600) {
-			return "medium"
-		}else if (w <= 1280 && h <= 800) {
-			return "large"
-		}else if (w <= 1920 && h <= 1080) {
-			return "extralarge"
-		}else{
-			return "unknownscreentype"
+//位置情報の取得をサポートしているか判定します
+function isGeolocation (handlerInput) {
+	let device = handlerInput.requestEnvelope.context.System.device
+	console.log(handlerInput.requestEnvelope.context.Geolocation)
+	if (device) {
+		let supportedInterfaces = device.supportedInterfaces
+		if (supportedInterfaces) {
+			let geolocation = supportedInterfaces.Geolocation
+			if (geolocation) {
+				return true
+			}
 		}
 	}
-	return null
+	return false
+}
+
+function getShapeType (handlerInput) {
+	let shape = handlerInput.requestEnvelope.context.Viewport.shape
+	if (shape) {
+		return shape
+	}else{
+		return null
+	}
 }
 
 function getScreenSize (handlerInput) {
@@ -123,3 +130,11 @@ function getDeviceId (handlerInput) {
 	}
 	return null
 }
+
+function getGeolocation (handlerInput) {
+	if (isGeolocation(handlerInput)) {
+		return handlerInput.requestEnvelope.context.Geolocation
+	}else{
+		return null
+	}
+} 
