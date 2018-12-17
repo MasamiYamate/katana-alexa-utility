@@ -20,6 +20,7 @@ function getSlotValue (handlerInput , slotName , isDebugMode) {
                         let values = resolutionsPerAuthority['values']
                         for (var j in values) {
                             let value = values[j]
+                            console.log(value)
                             let name = value['value']['name']
                             if (name) {
                                 responseValue = name
