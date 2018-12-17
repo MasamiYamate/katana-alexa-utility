@@ -71,10 +71,10 @@ const LaunchIntentHandler = {
         //※Designation to 「await」
         await util.dynamodb.saveData(handlerInput , saveData)
 
-		return handlerInput.responseBuilder
-			.speak('Wellcome to katana alexa utility test skill')
-			.withShouldEndSession(true)
-        	.getResponse();
+	return handlerInput.responseBuilder
+		.speak('Wellcome to katana alexa utility test skill')
+		.withShouldEndSession(true)
+		.getResponse();
 	}
 }
 
