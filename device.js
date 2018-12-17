@@ -48,7 +48,6 @@ function isDisplayDevice (handlerInput) {
 //位置情報の取得をサポートしているか判定します
 function isGeolocation (handlerInput) {
 	let device = handlerInput.requestEnvelope.context.System.device
-	console.log(handlerInput.requestEnvelope.context.Geolocation)
 	if (device) {
 		let supportedInterfaces = device.supportedInterfaces
 		if (supportedInterfaces) {
