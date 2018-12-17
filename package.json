@@ -1,6 +1,6 @@
 {
   "name": "katana-alexa-utility",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generic functions used in Alexa skill development",
   "main": "index.js",
   "scripts": {
