@@ -32,13 +32,19 @@ exports.getGeolocation = function (handlerInput) {
 
 //ディスプレイ付きデバイスか判定します
 function isDisplayDevice (handlerInput) {
-    let device = handlerInput.requestEnvelope.context.System.device
-	if (device) {
-		let supportedInterfaces = device.supportedInterfaces
-		if (supportedInterfaces) {
-			let display = supportedInterfaces.Display
-			if (display) {
-				return true
+    const context = handlerInput.requestEnvelope.context
+	if (context) {
+		const system = context.System
+		if (system) {
+			const device = system.device
+			if (device) {
+				const supportedInterfaces = device.supportedInterfaces
+				if (supportedInterfaces) {
+					const display = supportedInterfaces.Display
+					if (display) {
+						return true
+					}
+				}
 			}
 		}
 	}
