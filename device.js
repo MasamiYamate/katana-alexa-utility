@@ -136,6 +136,21 @@ function getDeviceId (handlerInput) {
 	return null
 }
 
+function getAccessToken (handlerInput) {
+	let session = handlerInput.requestEnvelope.session
+	if (session) {
+		let user = session.user
+		if (user) {
+			let token = user.accessToken
+			if (token) {
+				return token
+			}
+		}
+	}
+	return null
+}
+
+
 function getGeolocation (handlerInput) {
 	if (isGeolocation(handlerInput)) {
 		return handlerInput.requestEnvelope.context.Geolocation
