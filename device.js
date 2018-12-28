@@ -26,6 +26,10 @@ exports.getDeviceId = function (handlerInput) {
 	return getDeviceId(handlerInput)
 }
 
+exports.getAccessToken = function (handlerInput) {
+	return getAccessToken(handlerInput)
+}
+
 exports.getGeolocation = function (handlerInput) {
 	return getGeolocation(handlerInput)
 }
